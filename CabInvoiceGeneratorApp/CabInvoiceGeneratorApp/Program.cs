@@ -6,7 +6,7 @@ namespace CabInvoiceGeneratorApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome To Cab Invoice Generator App Problem Statements");
+            Console.WriteLine("Welcome to cab invoice generator problem statements");
         }
     }
 }
