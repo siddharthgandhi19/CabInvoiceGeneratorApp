@@ -8,15 +8,15 @@ namespace CabInvoiceGeneratorApp
 {
     public class InvoiceSummary
     {
+        public double totalNumberOfRides;
         public double totalFare;
-        public double averageFare;
-        public int noOfRides;
+        public double averageFarePerRide;
 
-        public InvoiceSummary(double totalFare, int noOfRides)
+        public InvoiceSummary(double totalFare, double totalNumberOfRides)
         {
             this.totalFare = totalFare;
-            this.noOfRides = noOfRides;
-            this.averageFare = totalFare / noOfRides;
+            this.totalNumberOfRides = totalNumberOfRides;
+            this.averageFarePerRide = this.totalFare / this.totalNumberOfRides;
         }
     }
 }

@@ -9,12 +9,12 @@ namespace CabInvoiceGeneratorApp
     public class RideRepository
     {
         private Dictionary<string, List<Ride>> userRideList = new Dictionary<string, List<Ride>>();
-        public void AddCabRides(string userId, Ride[] ride)
+        public void AddCabRides(string userID, Ride[] ride)
         {
-            bool checkList = this.userRideList.ContainsKey(userId);
-            if (checkList)
+            bool checkList = this.userRideList.ContainsKey(userID);
+            if (!checkList)
             {
-                this.userRideList.Add(userId, new List<Ride>(ride));
+                this.userRideList.Add(userID, new List<Ride>(ride));
             }
         }
         public Ride[] GetCabRides(string userId)
