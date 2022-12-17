@@ -19,14 +19,24 @@ namespace CabInvoiceGeneratorApp
             this.CAB_FARE = (distance * COST_PER_KILOMETER) + (time * COST_PER_MINUTE);
             return Math.Max(this.CAB_FARE, MINIMUM_FARE);
         }
-        public double GetMultipleRideFare(Ride[] rides)
+        //public double GetMultipleRideFare(Ride[] rides)
+        //{
+        //    double TOTAL_CAB_FARE = 0.0;
+        //    foreach (var data in rides)
+        //    {
+        //        TOTAL_CAB_FARE += this.CalculateFare(data.distance, data.time);
+        //    }
+        //    return TOTAL_CAB_FARE;
+        //}
+        //Refactor the above method
+        public InvoiceSummary GetMultipleRideFare(Ride[] rides)
         {
-            double TOTAL_CAB_FARE = 0.0;
+            double totalFare = 0.0;
             foreach (var data in rides)
             {
-                TOTAL_CAB_FARE += this.CalculateFare(data.distance, data.time);
+                totalFare += this.CalculateFare(data.distance, data.time);
             }
-            return TOTAL_CAB_FARE;
+            return new InvoiceSummary(totalFare, rides.Length);
         }
     }
 }
