@@ -1,12 +1,11 @@
 using CabInvoiceGeneratorApp;
+using static CabInvoiceGeneratorApp.RideOption;
 
 namespace CabInvoiceGeneratorAppTest
 {
     public class Tests
     {
-        public class CabInvoiceTest
-        {
-            private CabInvoiceGenerator cabInvoiceGenerator;
+           private CabInvoiceGenerator cabInvoiceGenerator;
             [SetUp]
             public void Setup() //For creating instance of class            
             {
@@ -62,6 +61,20 @@ namespace CabInvoiceGeneratorAppTest
                 Assert.AreEqual(110, INVOICE_SUMMARY_NEW.totalFare);
                 Assert.AreEqual(55, INVOICE_SUMMARY_NEW.averageFarePerRide);
                 Assert.AreEqual(2, INVOICE_SUMMARY_NEW.totalNumberOfRides);
+            }
+        [Test]
+        public void GivenInvalidDistance_Should_Return_CabInvoiceException()
+        {
+            try
+            {
+                double distance = -5; //in km
+                int time = 20;   //in minute
+                CabInvoiceGenerator invoiceGenerator = new CabInvoiceGenerator(RideTypes.NORMAL);
+                double fare = invoiceGenerator.CalculateFare(distance, time);
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(ex.Message,"Invalid Ride Type");
             }
         }
     }

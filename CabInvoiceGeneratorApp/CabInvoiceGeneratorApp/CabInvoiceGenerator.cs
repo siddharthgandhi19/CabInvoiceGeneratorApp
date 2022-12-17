@@ -1,17 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static CabInvoiceGeneratorApp.RideOption;
 
 namespace CabInvoiceGeneratorApp
 {
     public class CabInvoiceGenerator
     {
-        private static readonly double COST_PER_KILOMETER = 10.0;
-        private static readonly double COST_PER_MINUTE = 1.0;
-        private static readonly double MINIMUM_FARE = 5.0;
+        RideTypes rideType;
+        private  readonly double COST_PER_KILOMETER = 10.0;
+        private  readonly double COST_PER_MINUTE = 1.0;
+        private  readonly double MINIMUM_FARE = 5.0;
         private double CAB_FARE = 0.0;
+        public CabInvoiceGenerator()
+        {
+
+        }
+        public CabInvoiceGenerator(RideTypes rideType)
+        {
+            {
+                this.rideType = rideType;
+                this.rideRepository = new RideRepository();
+                try
+                {
+                    if (rideType.Equals(RideTypes.PREMIUM))
+                    {
+                        this.COST_PER_KILOMETER = 15;
+                        this.COST_PER_MINUTE = 2;
+                        this.MINIMUM_FARE = 20;
+                    }
+                    else if (rideType.Equals(RideTypes.NORMAL))
+                    {
+                        this.COST_PER_KILOMETER = 10;
+                        this.COST_PER_MINUTE = 1;
+                        this.MINIMUM_FARE = 5;
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Invalid Ride Type");
+                }
+            }
+        }
+       
 
         private RideRepository rideRepository = new RideRepository();
 
